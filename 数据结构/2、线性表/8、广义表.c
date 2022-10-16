@@ -71,7 +71,7 @@ int GlistLength(Glist C){
     Glist P=C;
     while(P){
         Number++;
-        P=P->ptr.tp;
+        P=P->ptr.tp;	// 其实就是计算有多少个表头的过程
     }
     return Number;
 }
