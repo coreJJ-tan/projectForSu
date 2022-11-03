@@ -2,7 +2,7 @@
     时间复杂度O(n)
     空间复杂度O(1)
 思路：
-    将链表成员拷贝并入栈，然后再出栈与原链表节点一一对比，期间节点不同时为NULL则失败，节点值不等也失败。
+    将链表成员拷贝并入栈，然后再出栈与原链表节点一一对比，节点值不等则失败。
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -126,12 +126,14 @@ int main(int argc, char* argv[])
     tmp2 = list_new->next;
     while(tmp1 != NULL && tmp2 != NULL)
     {
+        /*  这一步不需要了，因为肯定会同时为NULL
         if(tmp1 == NULL || tmp2 == NULL)
         {
             flag = 0;
             printf("不是回文结构\n");
             break;
         }
+        */
         if(tmp1->value == tmp2->value)
         {
             tmp1 = tmp1->next;
