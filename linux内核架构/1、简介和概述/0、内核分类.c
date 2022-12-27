@@ -8,3 +8,39 @@
     进程：
     进程切换：
     进程调度：
+    线程：linux使用clone方法创建线程，  
+
+3、Unix两种创建新进程的方式
+3.1 fork
+    fork可以创建当前进程的一个副本，父进程和子进程只有PID不同。在该系统调用执行后，父进程内存的内容将会被复制，linux使用了写时复制的技术来使fork操作更高效，主要的原理是将
+内存复制的操作延迟到父进程或子进程向某内存页面写入数据之前，在只读访问的情况下父进程和子进程可以共享同一内存页。
+
+3.2 exec
+    exec将一个新程序加载到当前进程的内存中并执行。旧程序的内存页将被刷出，其内容将替换为新的数据，然后开始执行新程序。
+
+4、
+    虚拟地址空间
+    物理地址空间
+    页表
+
+5、使用ps命令输出的进程中，内核线程名称由方括号括起来
+suguoxu@sgx:~$ ps -aux
+USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.1 185144  5620 ?        Ss   11月21   0:04 /sbin/init splash
+root         2  0.0  0.0      0     0 ?        S    11月21   0:00 [kthreadd]
+root         4  0.0  0.0      0     0 ?        I<   11月21   0:00 [kworker/0:0H]
+root         7  0.0  0.0      0     0 ?        I<   11月21   0:00 [mm_percpu_wq]
+root         8  0.0  0.0      0     0 ?        S    11月21   0:11 [ksoftirqd/0]
+root         9  0.0  0.0      0     0 ?        I    11月21   1:14 [rcu_sched]
+root        10  0.0  0.0      0     0 ?        I    11月21   0:00 [rcu_bh]
+root        11  0.0  0.0      0     0 ?        S    11月21   0:00 [migration/0]
+root        12  0.0  0.0      0     0 ?        S    11月21   0:01 [watchdog/0]
+root        13  0.0  0.0      0     0 ?        S    11月21   0:00 [cpuhp/0] // 斜杠后面的数字代表在限制在CPU0上运行
+root        14  0.0  0.0      0     0 ?        S    11月21   0:00 [cpuhp/1]
+root        15  0.0  0.0      0     0 ?        S    11月21   0:01 [watchdog/1]
+root        16  0.0  0.0      0     0 ?        S    11月21   0:00 [migration/1]
+root        17  0.0  0.0      0     0 ?        S    11月21   0:04 [ksoftirqd/1]
+root        19  0.0  0.0      0     0 ?        I<   11月21   0:00 [kworker/1:0H]
+root        20  0.0  0.0      0     0 ?        S    11月21   0:00 [cpuhp/2]
+root        21  0.0  0.0      0     0 ?        S    11月21   0:01 [watchdog/2]
+root        22  0.0  0.0      0     0 ?        S    11月21   0:00 [migration/2]
